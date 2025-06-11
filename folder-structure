@@ -1,0 +1,43 @@
+fastapi auth
+├── app/
+│   ├── api/                  # All route handlers
+│   │   ├── v1/
+│   │   │   ├── auth.py       # Auth routes (register, login, etc.)
+│   │   │   ├── users.py      # User profile routes
+│   │   │   ├── admin.py      # Admin-specific routes
+│   │   │   └── __init__.py
+│   │   └── __init__.py
+│   ├── core/                 # Core configurations & security
+│   │   ├── config.py         # Environment configs (from .env)
+│   │   ├── security.py       # JWT, OAuth, password hashing
+│   │   └── __init__.py
+│   ├── db/                   # Database setup and models
+│   │   ├── base.py           # SQLAlchemy Base class
+│   │   ├── models/           # All DB models
+│   │   │   ├── user.py
+│   │   │   └── __init__.py
+│   │   ├── session.py        # Async DB session
+│   │   └── __init__.py
+│   ├── schemas/              # Pydantic schemas
+│   │   ├── auth.py
+│   │   ├── user.py
+│   │   └── __init__.py
+│   ├── services/             # Business logic
+│   │   ├── auth_service.py
+│   │   ├── user_service.py
+│   │   └── __init__.py
+│   ├── utils/                # Utility functions (email, logging)
+│   │   ├── email.py
+│   │   ├── logging.py
+│   │   └── __init__.py
+│   ├── main.py               # FastAPI app entry point
+│   └── __init__.py
+├── alembic/                  # Alembic for migrations
+│   ├── versions/
+│   └── env.py
+├── .env                      # Environment variables
+├── requirements.txt          # All dependencies
+├── Dockerfile                # Docker setup
+├── docker-compose.yml        # Docker Compose for DB + App
+├── README.md
+└── .gitignore
