@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Boolean, Integer, DateTime
 from sqlalchemy.sql import func
-from app.db.base import Base
+from app.db.database import Base
 
 class User(Base):
     __tablename__ = "users"
