@@ -12,11 +12,11 @@ fastapi auth
 │   │   ├── security.py       # JWT, OAuth, password hashing
 │   │   └── __init__.py
 │   ├── db/                   # Database setup and models
-│   │   ├── base.py           # SQLAlchemy Base class
+│   │
 │   │   ├── models/           # All DB models
 │   │   │   ├── user.py
 │   │   │   └── __init__.py
-│   │   ├── session.py        # Async DB session
+│   │   ├── database.py        # Async DB session + base
 │   │   └── __init__.py
 │   ├── schemas/              # Pydantic schemas
 │   │   ├── auth.py

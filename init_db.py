@@ -1,8 +1,6 @@
 # app/init_db.py
-
 import asyncio
-from app.db.database import engine, Base  # import your Base and async engine
-from sqlalchemy.ext.asyncio import AsyncEngine
+from app.db.database import engine, Base  
 
 async def init_models():
     async with engine.begin() as conn:
