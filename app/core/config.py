@@ -1,8 +1,21 @@
-# config.py (at root level or inside app/)
-import os
-from dotenv import load_dotenv
+# app/core/config.py 
 
-# Load from .env at root level
+from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+import os
+
+# Load from .env
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+class Settings(BaseSettings):
+    SECRET_KEY: str
+    ADMIN_PATH: str = "/admin"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./test.db"
+    PROJECT_NAME: str = "My FastAPI App"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30  
+
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+settings = Settings()

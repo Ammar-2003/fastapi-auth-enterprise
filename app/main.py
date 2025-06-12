@@ -1,24 +1,22 @@
-#main.py
-from fastapi import FastAPI , Depends
-from typing import Annotated
-from sqlalchemy.orm import Session
-from app.api.v1 import auth
-from app.db.database import get_db
-from sqladmin import Admin, ModelView
-from app.db.models.user import User
-from app.db.database import engine  
-from app.api.v1.admin import AdminAuth
-from app.core.config import SECRET_KEY 
+from fastapi import FastAPI
+from sqladmin import Admin
+from app.db.database import engine, Base
+from app.db.admin import setup_admin
+from app.core.config import settings
+import asyncio
 
 app = FastAPI()
 
+# Create tables (async)
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
-db_dependency = Annotated[Session, Depends(get_db)]
+@app.on_event("startup")
+async def on_startup():
+    await init_db()
+    setup_admin(app)
 
+# Include your routers
+from app.api.v1 import auth
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
-
-admin = Admin(app, engine, authentication_backend=AdminAuth(secret_key=SECRET_KEY))
-class UserAdmin(ModelView, model=User):
-    column_list = [User.id, User.email, User.full_name, User.is_superuser]
-
-admin.add_view(UserAdmin)

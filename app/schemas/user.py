@@ -1,3 +1,4 @@
+#schemas/user.py
 from pydantic import BaseModel, EmailStr
 
 # For reading user data

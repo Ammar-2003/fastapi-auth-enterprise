@@ -6,7 +6,7 @@ from app.db.database import get_db
 from app.services.auth_service import register_user
 from app.core.security import verify_password
 from app.db.models.user import User
-from app.core.jwt import create_access_token
+from app.core.security import create_access_token
 
 from sqlalchemy.future import select
 
